@@ -1,5 +1,5 @@
 /* ================================
-   ESTILOS GENERALES
+   RESET Y CONFIGURACIÓN GENERAL
 ================================ */
 
 * {
@@ -12,9 +12,38 @@
 body {
     background: #f8f5f0;
     padding: 20px;
+    transition: background 0.3s, color 0.3s;
 }
 
-/* HEADER */
+/* ================================
+   MODO OSCURO
+================================ */
+
+body.dark {
+    background: #1b1b1b;
+    color: #f2f2f2;
+}
+
+body.dark .plato,
+body.dark .plato-admin,
+body.dark #factura-container,
+body.dark .orden {
+    background: #282828;
+    color: white;
+}
+
+body.dark button {
+    background: #b30000;
+}
+
+body.dark button:hover {
+    background: #cc0000;
+}
+
+/* ================================
+   HEADER
+================================ */
+
 header {
     text-align: center;
     margin-bottom: 25px;
@@ -32,7 +61,18 @@ header p {
     color: #444;
 }
 
-/* BOTONES */
+/* Modo oscuro header */
+body.dark header h1 {
+    color: #ff7272;
+}
+
+body.dark header p {
+    color: #ccc;
+}
+
+/* ================================
+   BOTONES
+================================ */
 
 button {
     background: #8b0000;
@@ -50,7 +90,9 @@ button:hover {
     background: #a30000;
 }
 
-/* INPUTS */
+/* ================================
+   INPUTS
+================================ */
 
 input, select {
     width: 100%;
@@ -59,6 +101,14 @@ input, select {
     border-radius: 8px;
     border: 1px solid #aaa;
     font-size: 15px;
+}
+
+/* Dark mode */
+body.dark input,
+body.dark select {
+    background: #333;
+    border: 1px solid #555;
+    color: white;
 }
 
 /* ================================
@@ -72,7 +122,9 @@ input, select {
     margin-top: 20px;
 }
 
-/* TARJETAS DE PLATOS */
+/* ================================
+   TARJETAS
+================================ */
 
 .plato, .plato-admin {
     background: white;
@@ -81,6 +133,11 @@ input, select {
     box-shadow: 0 4px 12px rgba(0,0,0,0.09);
     text-align: center;
     transition: 0.2s;
+}
+
+.plato:hover,
+.plato-admin:hover {
+    transform: translateY(-3px);
 }
 
 .plato img, .plato-admin img {
@@ -102,8 +159,15 @@ input, select {
     color: #444;
 }
 
-/* ADMIN - LISTA DE PLATOS */
+/* Dark mode */
+body.dark .plato h3,
+body.dark .plato-admin h3,
+body.dark .plato p,
+body.dark .plato-admin p {
+    color: white;
+}
 
+/* Botones específicos del admin */
 .plato-admin button {
     width: 100%;
     margin-top: 10px;
@@ -115,7 +179,7 @@ input, select {
 }
 
 /* ================================
-   BOTÓN DEL CARRITO
+   BOTÓN CARRITO
 ================================ */
 
 .btn-carrito {
@@ -128,10 +192,17 @@ input, select {
     border-radius: 50px;
     padding: 16px 25px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    cursor: pointer;
 }
 
 .btn-carrito:hover {
     background: #ffd000;
+}
+
+/* Dark mode carrito */
+body.dark .btn-carrito {
+    background: #ffc83d;
+    color: #000;
 }
 
 /* ================================
@@ -189,7 +260,14 @@ input, select {
     margin-bottom: 5px;
 }
 
-/* RESPONSIVE */
+/* Dark */
+body.dark .orden h2 {
+    color: #ff7070;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
 
 @media(max-width: 600px) {
     header h1 {
