@@ -1,280 +1,109 @@
-/* ================================
-   RESET Y CONFIGURACIÓN GENERAL
-================================ */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+:root{
+  --negro: #0B0B0B;
+  --dorado: #F7C527;
+  --rojo: #B12310;
+  --crema: #FFF7E6;
+  --rojo-oscuro: #7A0E00;
 }
 
-body {
-    background: #f8f5f0;
-    padding: 20px;
-    transition: background 0.3s, color 0.3s;
+/* RESET */
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--crema);
+  color: var(--negro);
+  padding:20px;
+  transition: background .25s, color .25s;
 }
 
-/* ================================
-   MODO OSCURO
-================================ */
+/* HEADER */
+header{
+  display:flex;
+  justify-content:center;
+  margin-bottom:18px;
+}
+.header-inner{
+  width:100%;
+  max-width:1200px;
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+.logo{
+  width:88px;height:88px;object-fit:contain;
+}
+.title-wrap h1{color:var(--rojo);font-size:28px}
+.title-wrap p{color:#444;font-size:14px;margin-top:4px}
+.header-actions{margin-left:auto;display:flex;gap:10px;align-items:center}
+.header-actions button{background:var(--rojo);color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer}
+.header-actions .ghost{background:transparent;border:1px solid rgba(0,0,0,0.08);color:var(--negro)}
 
-body.dark {
-    background: #1b1b1b;
-    color: #f2f2f2;
+/* MAIN LAYOUT */
+main{max-width:1200px;margin:0 auto;display:block}
+.view{display:none}
+.view.active{display:block}
+h2{font-size:28px;margin-bottom:12px;color:var(--rojo-oscuro)}
+
+/* MENU GRID */
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+}
+.plato{
+  background:#fff;border-radius:12px;padding:18px;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,0.05)
+}
+.plato img{width:100%;height:160px;object-fit:cover;border-radius:10px;margin-bottom:10px}
+.plato h3{color:var(--negro);margin-bottom:8px}
+.plato p{font-weight:700;color:#444;margin-bottom:12px}
+.plato button{background:var(--rojo);color:#fff;padding:10px 14px;border-radius:8px;border:none;cursor:pointer}
+
+/* CARRITO BOX */
+.carrito-box{
+  margin-top:20px;
+  background:transparent;padding:12px;border-radius:10px;
+}
+#carrito{background:#fff;padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
+#total{margin-top:8px}
+
+/* ASIDE LAYOUT small screens */
+@media(min-width:900px){
+  #menuView{display:grid;grid-template-columns:1fr 330px;gap:24px}
+  .carrito-box{position:sticky;top:20px}
 }
 
-body.dark .plato,
-body.dark .plato-admin,
-body.dark #factura-container,
-body.dark .orden {
-    background: #282828;
-    color: white;
-}
+/* ADMIN */
+.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:12px}
+.admin-card{background:#fff;padding:14px;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,0.05)}
+.admin-list{}
 
-body.dark button {
-    background: #b30000;
-}
+/* COCINA */
+.orden{background:#fff;padding:14px;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,0.05);margin-bottom:12px}
+.orden h2{color:var(--rojo)}
 
-body.dark button:hover {
-    background: #cc0000;
-}
+/* INPUTS, BUTTONS */
+input,select{width:100%;padding:10px;border-radius:8px;border:1px solid #ddd;margin-bottom:10px}
+button{transition:transform .12s}
+button:active{transform:translateY(1px)}
 
-/* ================================
-   HEADER
-================================ */
+/* FOOTER */
+footer{text-align:center;margin-top:26px;color:#666;font-size:13px}
 
-header {
-    text-align: center;
-    margin-bottom: 25px;
-}
+/* MODAL LOGIN */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:none;align-items:center;justify-content:center;padding:20px}
+.modal .modal-content{background:var(--crema);padding:18px;border-radius:10px;max-width:420px;width:100%;box-shadow:0 12px 30px rgba(0,0,0,0.3)}
+.modal .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
+.modal.show{display:flex}
 
-header h1 {
-    font-size: 32px;
-    color: #8b0000;
-    font-weight: bold;
-}
+/* DARK MODE */
+body.dark{background:var(--negro);color:var(--crema)}
+body.dark .plato, body.dark .admin-card, body.dark #carrito, body.dark .orden{background:#1f1f1f;color:var(--crema)}
+body.dark .plato h3, body.dark .orden h2{color:var(--dorado)}
+body.dark header{filter:brightness(.9)}
 
-header p {
-    margin-top: 8px;
-    font-size: 18px;
-    color: #444;
-}
-
-/* Modo oscuro header */
-body.dark header h1 {
-    color: #ff7272;
-}
-
-body.dark header p {
-    color: #ccc;
-}
-
-/* ================================
-   BOTONES
-================================ */
-
-button {
-    background: #8b0000;
-    color: white;
-    border: none;
-    padding: 12px 18px;
-    border-radius: 8px;
-    margin-top: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: 0.2s;
-}
-
-button:hover {
-    background: #a30000;
-}
-
-/* ================================
-   INPUTS
-================================ */
-
-input, select {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 8px;
-    border-radius: 8px;
-    border: 1px solid #aaa;
-    font-size: 15px;
-}
-
-/* Dark mode */
-body.dark input,
-body.dark select {
-    background: #333;
-    border: 1px solid #555;
-    color: white;
-}
-
-/* ================================
-   GRID PARA PLATOS
-================================ */
-
-.menu-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-
-/* ================================
-   TARJETAS
-================================ */
-
-.plato, .plato-admin {
-    background: white;
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.09);
-    text-align: center;
-    transition: 0.2s;
-}
-
-.plato:hover,
-.plato-admin:hover {
-    transform: translateY(-3px);
-}
-
-.plato img, .plato-admin img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 12px;
-}
-
-.plato h3, .plato-admin h3 {
-    margin: 10px 0;
-    color: #333;
-    font-size: 20px;
-}
-
-.plato p, .plato-admin p {
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: #444;
-}
-
-/* Dark mode */
-body.dark .plato h3,
-body.dark .plato-admin h3,
-body.dark .plato p,
-body.dark .plato-admin p {
-    color: white;
-}
-
-/* Botones específicos del admin */
-.plato-admin button {
-    width: 100%;
-    margin-top: 10px;
-    background: #444;
-}
-
-.plato-admin button:hover {
-    background: #000;
-}
-
-/* ================================
-   BOTÓN CARRITO
-================================ */
-
-.btn-carrito {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    background: #ffae00;
-    color: #000;
-    font-weight: bold;
-    border-radius: 50px;
-    padding: 16px 25px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    cursor: pointer;
-}
-
-.btn-carrito:hover {
-    background: #ffd000;
-}
-
-/* Dark mode carrito */
-body.dark .btn-carrito {
-    background: #ffc83d;
-    color: #000;
-}
-
-/* ================================
-   FACTURA
-================================ */
-
-#factura-container {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.linea {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.total {
-    font-size: 22px;
-    font-weight: bold;
-    margin-top: 20px;
-    text-align: right;
-}
-
-/* ================================
-   COCINA - ORDENES
-================================ */
-
-#ordenes-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.orden {
-    background: white;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.orden h2 {
-    color: #8b0000;
-    margin-bottom: 10px;
-}
-
-.orden ul {
-    margin-top: 8px;
-    padding-left: 20px;
-}
-
-.orden ul li {
-    margin-bottom: 5px;
-}
-
-/* Dark */
-body.dark .orden h2 {
-    color: #ff7070;
-}
-
-/* ================================
-   RESPONSIVE
-================================ */
-
-@media(max-width: 600px) {
-    header h1 {
-        font-size: 26px;
-    }
-
-    button {
-        width: 100%;
-    }
+/* responsive */
+@media(max-width:720px){
+  .admin-grid{grid-template-columns:1fr}
+  .header-inner{padding:0 8px}
+  .logo{width:64px;height:64px}
 }
