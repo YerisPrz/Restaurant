@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurante Unificado</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js"></script>
+
+    <!-- Scripts -->
+    <script src="menu.js" defer></script>
+    <script src="app.js" defer></script>
+    <script src="cocina.js" defer></script>
+    <script src="admin.js" defer></script>
+</head>
+
+<body>
+
+    <header>
+        <h1>Restaurante</h1>
+        <p>Menú • Cocina • Administración</p>
+    </header>
+
+    <!-- NAV -->
+    <nav>
+        <button onclick="mostrar('menuPantalla')">Menú</button>
+        <button onclick="mostrar('cocinaPantalla')">Cocina</button>
+        <button onclick="mostrar('adminPantalla')">Admin</button>
+    </nav>
+
+    <!-- ============ MENÚ ============ -->
+    <section id="menuPantalla" class="pantalla active">
+
+        <h1>Menú del Restaurante</h1>
+
+        <div id="menu" class="menu-grid"></div>
+
+        <h2>🛒 Carrito</h2>
+        <div id="carrito"></div>
+
+        <h3 id="total">Total: RD$0</h3>
+        <button onclick="generarFactura()">Pagar</button>
+
+    </section>
+
+    <!-- ============ COCINA ============ -->
+    <section id="cocinaPantalla" class="pantalla">
+
+        <h1>📦 Órdenes en Cocina</h1>
+
+        <div id="ordenes-container">
+            <div id="ordenes"></div>
+        </div>
+
+    </section>
+
+    <!-- ============ ADMIN ============ -->
+    <section id="adminPantalla" class="pantalla">
+
+        <h1>🛠 Administración</h1>
+
+        <h2>Agregar Plato</h2>
+        <input id="nombre" placeholder="Nombre del plato">
+        <input id="precio" placeholder="Precio" type="number">
+        <input id="categoria" placeholder="Categoría">
+        <input id="img" placeholder="URL de imagen">
+        <button onclick="agregarPlato()">Agregar</button>
+
+        <h2>Eliminar Platos</h2>
+        <div id="listaPlatos" class="menu-grid"></div>
+
+    </section>
+
+    <script>
+        function mostrar(id) {
+            document.querySelectorAll(".pantalla").forEach(div => div.classList.remove("active"));
+            document.getElementById(id).classList.add("active");
+        }
+    </script>
+
+</body>
+</html>
