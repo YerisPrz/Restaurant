@@ -1,84 +1,98 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Restaurante Unificado</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="utf-8" />
+    <title>Elias Burger - Restaurante</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="CSS/styles.css">
 
-    <!-- Firebase -->
+    <!-- Firebase (DEJA ESTAS LÍNEAS en el head) -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js"></script>
 
-    <!-- Scripts -->
-    <script src="menu.js" defer></script>
-    <script src="app.js" defer></script>
-    <script src="cocina.js" defer></script>
-    <script src="admin.js" defer></script>
+    <!-- main.js se carga con defer -->
+    <script src="JS/main.js" defer></script>
 </head>
-
 <body>
 
-    <header>
-        <h1>Restaurante</h1>
-        <p>Menú • Cocina • Administración</p>
-    </header>
+<header>
+    <div class="header-inner">
+        <img src="img/logo.png" alt="Elias Burger" class="logo">
+        <div class="title-wrap">
+            <h1>Elias Burger</h1>
+            <p>Menú • Cocina • Administración</p>
+        </div>
 
-    <!-- NAV -->
-    <nav>
-        <button onclick="mostrar('menuPantalla')">Menú</button>
-        <button onclick="mostrar('cocinaPantalla')">Cocina</button>
-        <button onclick="mostrar('adminPantalla')">Admin</button>
-    </nav>
+        <div class="header-actions">
+            <button id="darkToggleHeader" class="ghost">Modo oscuro</button>
+            <button onclick="mostrar('menuView')">Menú</button>
+            <button onclick="mostrar('cocinaView')">Cocina</button>
+            <button onclick="abrirLogin()">Admin</button>
+        </div>
+    </div>
+</header>
 
-    <!-- ============ MENÚ ============ -->
-    <section id="menuPantalla" class="pantalla active">
-
-        <h1>Menú del Restaurante</h1>
-
+<main>
+    <!-- MENÚ / CLIENTE -->
+    <section id="menuView" class="view active">
+        <h2>Menú del Restaurante</h2>
         <div id="menu" class="menu-grid"></div>
 
-        <h2>🛒 Carrito</h2>
-        <div id="carrito"></div>
-
-        <h3 id="total">Total: RD$0</h3>
-        <button onclick="generarFactura()">Pagar</button>
-
+        <aside class="carrito-box">
+            <h3>🛒 Carrito</h3>
+            <div id="carrito"></div>
+            <h4 id="total">Total: RD$0</h4>
+            <button onclick="generarFactura()">Pagar</button>
+        </aside>
     </section>
 
-    <!-- ============ COCINA ============ -->
-    <section id="cocinaPantalla" class="pantalla">
-
-        <h1>📦 Órdenes en Cocina</h1>
-
+    <!-- COCINA -->
+    <section id="cocinaView" class="view">
+        <h2>📦 Órdenes en Cocina</h2>
         <div id="ordenes-container">
             <div id="ordenes"></div>
         </div>
-
     </section>
 
-    <!-- ============ ADMIN ============ -->
-    <section id="adminPantalla" class="pantalla">
+    <!-- ADMIN (protegido; solo visible tras login) -->
+    <section id="adminView" class="view">
+        <h2>🛠 Administración</h2>
 
-        <h1>🛠 Administración</h1>
+        <div class="admin-grid">
+            <div class="admin-card">
+                <h3>Agregar Plato</h3>
+                <input id="nombre" placeholder="Nombre del plato">
+                <input id="precio" placeholder="Precio" type="number">
+                <input id="categoria" placeholder="Categoría">
+                <input id="img" placeholder="URL de imagen">
+                <button onclick="agregarPlato()">Agregar</button>
+            </div>
 
-        <h2>Agregar Plato</h2>
-        <input id="nombre" placeholder="Nombre del plato">
-        <input id="precio" placeholder="Precio" type="number">
-        <input id="categoria" placeholder="Categoría">
-        <input id="img" placeholder="URL de imagen">
-        <button onclick="agregarPlato()">Agregar</button>
-
-        <h2>Eliminar Platos</h2>
-        <div id="listaPlatos" class="menu-grid"></div>
-
+            <div class="admin-list">
+                <h3>Lista de Platos</h3>
+                <div id="listaPlatos" class="menu-grid"></div>
+            </div>
+        </div>
     </section>
+</main>
 
-    <script>
-        function mostrar(id) {
-            document.querySelectorAll(".pantalla").forEach(div => div.classList.remove("active"));
-            document.getElementById(id).classList.add("active");
-        }
-    </script>
+<!-- LOGIN MODAL SIMPLE -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <h3>Admin Login</h3>
+        <input id="loginUser" placeholder="Usuario">
+        <input id="loginPass" placeholder="Contraseña" type="password">
+        <div class="modal-actions">
+            <button id="loginBtn">Entrar</button>
+            <button onclick="cerrarLogin()" class="ghost">Cancelar</button>
+        </div>
+        <p class="small">Usuario por defecto: <b>admin</b> / Contraseña: <b>1234</b></p>
+    </div>
+</div>
+
+<footer>
+    <p>Elias Burger ©</p>
+</footer>
 
 </body>
 </html>
